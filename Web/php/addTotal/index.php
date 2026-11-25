@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'NOMBRE DE LA BASE DE DATOS'; // Cambiar por el nombre de la base de datos
+$db   = 'eklipse_db'; // Cambiar por el nombre de la base de datos
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

@@ -1,11 +1,23 @@
 <?php
 session_start();
 
-// 1. Conexión a la base de datos (datos típicos de XAMPP/WAMP)
-$conexion = new mysqli("localhost", "root", "", "nombre_de_tu_bd");
+$host = 'localhost';
+$db   = 'eklipse_db'; // Cambiar por el nombre de la base de datos
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
 }
 
 // 2. Recoger datos del formulario
@@ -13,13 +25,12 @@ $usuario = $_POST['usuario'];
 $password = $_POST['password'];
 
 // 3. Consulta preparada para evitar inyección SQL
-$stmt = $conexion->prepare("SELECT id, usuario, password FROM usuarios WHERE usuario = ?");
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$resultado = $stmt->get_result();
+$stmt = $pdo->prepare("SELECT id, usuario, password FROM usuarios WHERE usuario = ?");
+$stmt->execute([$usuario]);
+$fila = $stmt->fetch();
 
 // 4. Comprobar si existe el usuario y coincide la contraseña
-if ($fila = $resultado->fetch_assoc()) {
+if ($fila) {
     // Si en vuestra BD guardáis contraseñas en texto plano:
     if ($password === $fila['password']) { 
     // (Nota: si usáis password_hash(), cambia la línea de arriba por: if (password_verify($password, $fila['password'])) )
@@ -32,6 +43,5 @@ if ($fila = $resultado->fetch_assoc()) {
 // Si falla el usuario o la contraseña:
 echo "<script>alert('Usuario o contraseña incorrectos'); window.location.href='login.html';</script>";
 
-$stmt->close();
-$conexion->close();
+$pdo = null;
 ?>
