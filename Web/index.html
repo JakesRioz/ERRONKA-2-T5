@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,28 @@
 </head>
 
 <body>
-<h2>All data in table</h2>
-<div id="idTotalGet"></div>
+    <header>
+        <span>Intranet - Hola,
+            <?php echo htmlspecialchars($_SESSION['usuario']); ?>
+        </span>
+        <a href="logout.php">Cerrar sesión</a>
+    </header>
 
-<div id="idTotalAdd">
-    <label for="day_id">Day:</label>
-    <input type="text" id="inDayId">
-    <button type="button" id="btnAdd">Add</button>
-</div>
+    <main>
+        <h1>Bienvenido a la Intranet</h1>
+        <p>Esta es la página principal de la intranet.</p>
+        <h2>All data in table</h2>
+        <div id="idTotalGet"></div>
 
-<script src="js/jquery-4.0.0.min.js"></script>
-<script src="js/app.js"></script>
+        <div id="idTotalAdd">
+            <label for="day_id">Day:</label>
+            <input type="text" id="inDayId">
+            <button type="button" id="btnAdd">Add</button>
+        </div>
+
+        <script src="js/jquery-4.0.0.min.js"></script>
+        <script src="js/app.js"></script>
+    </main>
 </body>
+
 </html>
