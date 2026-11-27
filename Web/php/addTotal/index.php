@@ -1,6 +1,8 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
+
 $host = 'localhost';
-$db   = 'eklipse_db'; // Cambiar por el nombre de la base de datos
+$db   = 'eklipse_db';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
@@ -14,27 +16,17 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (PDOException $e) {
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['msg' => 'Error de conexión: ' . $e->getMessage()]);
-    exit;
+
+    $eguna = $_POST['eguna'] ?? '';
+    $dirua = $_POST['dirua'] ?? '';
+
+    $stmt = $pdo->prepare("INSERT INTO egunerokoa (eguna, dirua) VALUES (?, ?)");
+    $stmt->execute([$eguna, $dirua]);
+
+    echo json_encode(['msg' => 'success']);
+} catch (\PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['msg' => 'error']);
 }
 
-$raw = stripslashes($_POST['param']);
-$param = json_decode($raw);
-
-$sql = "INSERT INTO users (id, username, password, company) VALUES (:id, :username, :password, :company)"; //POR EDITAR
-$stmt = $pdo->prepare($sql);
-
-
-
-$stmt->execute();
-
-$rowsAffected = $stmt->rowCount();
-if ($rowsAffected > 0) {
-    $returnValue = ['msg' => "Success: Added $rowsAffected user(s)."];
-    } else {
-    $returnValue = ['msg' => "No user found with ID " . $param->id . " to delete."];} 
-
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($returnValue);
+?>

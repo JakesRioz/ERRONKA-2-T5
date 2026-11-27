@@ -19,7 +19,7 @@ try {
     // konexioa ezarri
     $pdo = new PDO($dsn, $user, $pass, $options);
     // idatzi select-a eta exekutatu
-    $sql = "SELECT * FROM users"; //Cambiar users por el nombre de la tabla que se quiera consultar
+    $sql = "SELECT * FROM egunerokoa ORDER BY id DESC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     // emaitza array baten sartu
