@@ -1,0 +1,23 @@
+# Segurtasun Kopien Plana (WAE)
+
+## 1. Zer gordetzen da?
+- **Webguneko kodea:** PHP, HTML, CSS, JS eta baliabide guztiak.
+- **Datu-basea:** Taulen egitura eta datuak `.sql` formatuan esportatuta.
+
+## 2. Non eta nola gordetzen da?
+- **Kodea:** GitHub biltegian (`main` adarrean bertsio egonkorra).
+- **Kopia osoa (Kodea + DB):** Taldeko [Google Drive / OneDrive] karpetan, `.zip` eta `.sql` fitxategietan.
+- **Fitxategien izena:** `WAE_Kop_UUUU-HH-EE.sql` eta `WAE_Kop_UUUU-HH-EE.zip`.
+
+## 3. Maiztasuna (Noiz egiten dira?)
+- **Saio bakoitzaren amaieran:** Aldaketak GitHub-era igo (`commit` + `push`).
+- **Kontrol puntuen aurretik:** Kodearen `.zip` eta datu-basearen `.sql` kopia osoa egin eta hodeian gorde.
+- **Aldaketa handien aurretik:** Datu-basearen egitura aldatu aurretik `.sql` kopia atera.
+
+## 4. Arduradunak
+- **Kodearen igoera:** Taldekide bakoitzak bere zatia eguneratuko du GitHub-en.
+- **Datu-basearen esportazioa:** Xabier Gayubas arduratuko da `.sql` fitxategia sortzeaz eta igotzeaz.
+
+## 5. Berreskuratze-prozedura (Zer egin akats bat badago?)
+1. **Kodea hondatzen bada:** GitHub-eko azken bertsio egonkorrera itzuli edo Drive-ko azken `.zip` fitxategia deskargatu.
+2. **Datu-basea galtzen bada:** phpMyAdmin-en datu-basea garbitu eta Drive-ko azken `.sql` fitxategia inportatu.
